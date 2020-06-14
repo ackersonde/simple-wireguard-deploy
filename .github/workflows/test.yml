@@ -37,9 +37,10 @@ jobs:
 
     - name: Prepare ssh key for remote login
       run: |
+        mkdir ~/.ssh/
         echo "${{ secrets.CTX_SERVER_DEPLOY_SECRET }}" | base64 -d > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
 
-    # Runs a set of commands using the runners shell
     - name: Deploy the package
       run: |
         sudo wg-quick up tunnel

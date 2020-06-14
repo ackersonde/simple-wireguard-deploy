@@ -32,10 +32,9 @@ jobs:
         sed -i -e "s@{{CTX_WIREGUARD_SERVER_PUBLIC_KEY}}@${{ secrets.CTX_WIREGUARD_SERVER_PUBLIC_KEY }}@" $GITHUB_WORKSPACE/tunnel.conf
         sed -i -e "s@{{CTX_WIREGUARD_PRESHARED_KEY}}@${{ secrets.CTX_WIREGUARD_PRESHARED_KEY }}@" $GITHUB_WORKSPACE/tunnel.conf
         sed -i -e "s@{{CTX_WIREGUARD_SERVER_ENDPOINT}}@${{ secrets.CTX_WIREGUARD_SERVER_ENDPOINT }}@" $GITHUB_WORKSPACE/tunnel.conf
-        sed -i -e "s@{{CTX_WIREGUARD_LISTEN_PORT}}@${{ secrets.CTX_WIREGUARD_LISTEN_PORT }}@g" $GITHUB_WORKSPACE/tunnel.conf
-        
+
         sudo cp $GITHUB_WORKSPACE/tunnel.conf /etc/wireguard/
-        
+
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |

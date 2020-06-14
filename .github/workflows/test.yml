@@ -26,8 +26,16 @@ jobs:
     - name: Run a one-line script
       run: sudo apt-get install wireguard linux-headers-$(uname -r)
 
+    - name: Create wireguard tunnel configuration
+      run: |
+        sed -i -e "s@{{POINT_ONE}}@${{ secrets.POINT_ONE }}@" $GITHUB_WORKSPACE/tunnel.conf
+        sed -i -e "s@{{POINT_TWO}}@${{ secrets.POINT_TWO }}@" $GITHUB_WORKSPACE/tunnel.conf
+        cat $GITHUB_WORKSPACE/tunnel.conf
+        sudo cp $GITHUB_WORKSPACE/tunnel.conf /etc/wireguard
+        
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        echo Add other actions to build
+        wg-quick up tunnel
+        ping 192.168.178.25

@@ -38,6 +38,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
+        sudo sysctl -w net.ipv4.ip_forward=1
         sudo wg-quick up tunnel
         ping -c 4 192.168.178.25
         sudo wg-quick down tunnel

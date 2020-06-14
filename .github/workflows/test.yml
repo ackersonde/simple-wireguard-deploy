@@ -35,9 +35,14 @@ jobs:
 
         sudo cp $GITHUB_WORKSPACE/tunnel.conf /etc/wireguard/
 
+    - name: Prepare ssh key for remote login
+      run: |
+        echo "${{ secrets.CTX_SERVER_DEPLOY_SECRET }}" | base64 -d > ~/.ssh/id_rsa
+
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: Deploy the package
       run: |
         sudo wg-quick up tunnel
-        ping -c 4 192.168.178.25
+        scp -o StrictHostKeyChecking=no \
+          $GITHUB_WORKSPACE/tunnel.conf ubuntu@192.168.178.25:~/gha_tunnel.conf
         sudo wg-quick down tunnel

@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: Run a one-line script
+    - name: Install wireguard
       run: sudo apt-get install wireguard linux-headers-$(uname -r)
 
     - name: Create wireguard tunnel configuration
@@ -32,6 +32,7 @@ jobs:
         sed -i -e "s@{{CTX_WIREGUARD_SERVER_PUBLIC_KEY}}@${{ secrets.CTX_WIREGUARD_SERVER_PUBLIC_KEY }}@" $GITHUB_WORKSPACE/tunnel.conf
         sed -i -e "s@{{CTX_WIREGUARD_PRESHARED_KEY}}@${{ secrets.CTX_WIREGUARD_PRESHARED_KEY }}@" $GITHUB_WORKSPACE/tunnel.conf
         sed -i -e "s@{{CTX_WIREGUARD_SERVER_ENDPOINT}}@${{ secrets.CTX_WIREGUARD_SERVER_ENDPOINT }}@" $GITHUB_WORKSPACE/tunnel.conf
+        sed -i -e "s@{{CTX_WIREGUARD_LISTEN_PORT}}@${{ secrets.CTX_WIREGUARD_LISTEN_PORT }}@g" $GITHUB_WORKSPACE/tunnel.conf
         
         sudo cp $GITHUB_WORKSPACE/tunnel.conf /etc/wireguard/
         
@@ -39,5 +40,7 @@ jobs:
     - name: Run a multi-line script
       run: |
         echo Add other actions to build
+        dig ackerson.de
         wg-quick up tunnel
         ping 192.168.178.25
+        wg-quick down tunnel

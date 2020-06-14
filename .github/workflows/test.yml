@@ -43,7 +43,7 @@ jobs:
 
     - name: Deploy the package
       run: |
-        sudo wg-quick up tunnel
+        wg-quick up tunnel
         scp -o StrictHostKeyChecking=no \
           $GITHUB_WORKSPACE/tunnel.conf ubuntu@192.168.178.25:~/gha_tunnel.conf
-        sudo wg-quick down tunnel
+        wg-quick down tunnel

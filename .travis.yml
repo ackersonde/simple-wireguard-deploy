@@ -1,0 +1,10 @@
+arch: arm64           # LXD container based build for OSS only
+os: linux             # required for arch different than amd64
+dist: focal           # or bionic | xenial with xenial as default
+language: go
+
+script:
+  - go version
+  - uname -a
+  - curl http://rabbit.ackerson.de
+ 

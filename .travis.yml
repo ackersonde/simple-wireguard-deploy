@@ -5,6 +5,6 @@ language: go
 
 script:
   - uname -a
-  - ip -a
+  - ip addr show
   - ping6 google.com -c 5
   - curl -6 http://rabbit.ackerson.de

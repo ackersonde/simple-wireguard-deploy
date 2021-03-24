@@ -4,7 +4,7 @@ dist: focal           # or bionic | xenial with xenial as default
 language: go
 
 script:
-  - go version
   - uname -a
-  - curl http://rabbit.ackerson.de
- 
+  - ip -a
+  - ping6 google.com -c 5
+  - curl -6 http://rabbit.ackerson.de

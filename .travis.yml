@@ -9,10 +9,15 @@ before_install:
   - docker pull alpine
   
 script:
+  - lxc launch ubuntu:20.04 my-container
+  - lxc list
+  - lxc exec my-container bash
+  - ip addr show
+  - ping6 google.com -c 5
   - #uname -a
   - #ip addr show
   - #curl -6 http://rabbit.ackerson.de
-  - docker run -dit --name test alpine
-  - docker exec test ip -6 route
-  - docker exec test ip -6 addr
-  - docker exec test ping6 google.com -c 5
+  - #docker run -dit --name test alpine
+  - #docker exec test ip -6 route
+  - #docker exec test ip -6 addr
+  - #docker exec test ping6 google.com -c 5

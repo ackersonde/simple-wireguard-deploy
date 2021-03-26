@@ -4,8 +4,8 @@ dist: focal           # or bionic | xenial with xenial as default
 language: go
 
 before_install:
-  - echo '{"ipv6":true,"fixed-cidr-v6":"2001:db8:1::/64"}' | sudo tee /etc/docker/daemon.json
-  - sudo service docker restart
+  - #echo '{"ipv6":true,"fixed-cidr-v6":"2001:db8:1::/64"}' | sudo tee /etc/docker/daemon.json
+  - #sudo service docker restart
   - docker pull alpine
   
 script:

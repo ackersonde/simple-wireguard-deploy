@@ -6,9 +6,12 @@ language: go
 before_install:
   - echo '{"ipv6":true,"fixed-cidr-v6":"2001:db8:1::/64"}' | sudo tee /etc/docker/daemon.json
   - sudo service docker restart
+  - docker pull alpine
   
 script:
-  - uname -a
-  - ip addr show
-  - ping6 google.com -c 5
-  - curl -6 http://rabbit.ackerson.de
+  - #uname -a
+  - #ip addr show
+  - #curl -6 http://rabbit.ackerson.de
+  - docker run -dit --name test alpine
+  - docker exec test ip addr show
+  - docker exec test ping6 google.com -c 5

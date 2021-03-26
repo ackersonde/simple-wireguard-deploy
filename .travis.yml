@@ -13,5 +13,6 @@ script:
   - #ip addr show
   - #curl -6 http://rabbit.ackerson.de
   - docker run -dit --name test alpine
-  - docker exec test ip addr show
+  - docker exec test ip -6 route
+  - docker exec test ip -6 addr
   - docker exec test ping6 google.com -c 5

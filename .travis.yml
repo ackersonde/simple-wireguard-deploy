@@ -4,20 +4,15 @@ dist: focal           # or bionic | xenial with xenial as default
 language: go
 
 before_install:
-  - #echo '{"ipv6":true,"fixed-cidr-v6":"2001:db8:1::/64"}' | sudo tee /etc/docker/daemon.json
-  - #sudo service docker restart
+  - echo '{"ipv6":true,"fixed-cidr-v6":"2001:db8:1::/64"}' | sudo tee /etc/docker/daemon.json
+  - sudo service docker restart
   - docker pull alpine
   
 script:
-  - lxc launch ubuntu:20.04 my-container
-  - lxc list
-  - lxc exec my-container bash
-  - ip addr show
-  - ping6 google.com -c 5
   - #uname -a
   - #ip addr show
   - #curl -6 http://rabbit.ackerson.de
-  - #docker run -dit --name test alpine
-  - #docker exec test ip -6 route
-  - #docker exec test ip -6 addr
-  - #docker exec test ping6 google.com -c 5
+  - docker run -dit --name test alpine
+  - docker exec test ip -6 route
+  - docker exec test ip -6 addr
+  - docker exec test ping6 google.com -c 5
